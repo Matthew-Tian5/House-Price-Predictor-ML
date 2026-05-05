@@ -37,12 +37,27 @@ plt.show()
 
 
 
-
+# makine the model learn data
 from sklearn.model_selection import train_test_split
-X = df.drop('Price', axis=1)
-Y = df['Price']
+X = df.drop('Price', axis=1) #the inputs
+Y = df['Price']# what we predict
 
+
+#radnom state is 42 so that the results are reproducible
 X_train, X_test, Y_train, Y_test = train_test_split( X, Y, test_size = 0.2, random_state = 42)
 
 print(f"Training samples: {X_train.shape[0]}")
 print(f"Test samples: {X_test.shape[0]}")
+
+
+
+
+
+#now we need a scale since ML models with linear regressions needs a standard scale for the data
+
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+
+X_train_scaled = scaler.fit_transform(X_train) # learn scale from training data
+X_test_scaled = scaler.transform(X_test) # apply same scale to test data
