@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.datasets import fetch_california_housing, fetch_california_housing
 
 data = fetch_california_housing()
@@ -25,3 +26,11 @@ print(df.isnull().sum())
 
 # See how strongly each feature correlates with Price
 print(df.corr()['Price'].sort_values(ascending=False))
+
+
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(df.corr(), annot=True, fmt='.2f', cmap='coolwarm')
+plt.title('Feature Correlation Heatmap')
+plt.tight_layout()
+plt.show()
