@@ -13,9 +13,15 @@ print(df.describe())
 print(df.shape)
 
 
-
+print(df.isnull().sum())
 
 # numpy imports numpy library and gives it the alias np, which is a common convention. This allows us to use numpy functions with the prefix np. for numerical computations and array operations
 #import pandas which allows for data manipulation and analysis
 # import matplotib.pyplot for creating plots and visualizations
 #sklearn.datasets gets datasets to lead californias housing dataset
+
+
+
+
+# See how strongly each feature correlates with Price
+print(df.corr()['Price'].sort_values(ascending=False))
