@@ -34,3 +34,15 @@ sns.heatmap(df.corr(), annot=True, fmt='.2f', cmap='coolwarm')
 plt.title('Feature Correlation Heatmap')
 plt.tight_layout()
 plt.show()
+
+
+
+
+from sklearn.model_selection import train_test_split
+X = df.drop('Price', axis=1)
+Y = df['Price']
+
+X_train, X_test, Y_train, Y_test = train_test_split( X, Y, test_size = 0.2, random_state = 42)
+
+print(f"Training samples: {X_train.shape[0]}")
+print(f"Test samples: {X_test.shape[0]}")
