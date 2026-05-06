@@ -90,3 +90,15 @@ print(f"RMSE: {rmse:.4f}")
 
 r2 = r2_score(Y_test, Y_pred) # tells me the variation in prices
 print(f"R² Score: {r2:.4f}")
+
+
+
+
+plt.figure(figsize=(8, 6))
+plt.scatter(Y_test, Y_pred, alpha=0.3, color='steelblue')
+plt.plot([Y_test.min(), Y_test.max()], [Y_test.min(), Y_test.max()], 'r--', lw=2)
+plt.xlabel('Actual Price')
+plt.ylabel('Predicted Price')
+plt.title('Actual vs Predicted House Prices')
+plt.tight_layout()
+plt.show()

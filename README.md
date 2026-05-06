@@ -1,52 +1,111 @@
-# House Price Predictor
+# 🏠 House Price Predictor
 
-A machine learning project that predicts house prices using the California Housing dataset from scikit-learn. This project demonstrates data loading, exploration, and basic analysis for house price prediction.
+A machine learning project that predicts California housing prices using Linear Regression. Built with scikit-learn as an introduction to core ML concepts.
 
-## Features
+---
 
-- Loads the California Housing dataset
-- Performs basic data exploration (head, describe, shape)
-- Prepares data for machine learning models
+## 📋 Project Overview
 
-## Requirements
+This model takes neighborhood-level features as input and predicts the median house price for that area. It uses the **California Housing Dataset** which contains data from 20,000+ neighborhoods.
 
-- Python 3.x
-- NumPy
-- Pandas
-- Matplotlib
-- scikit-learn
+---
 
-## Installation
+## 📊 Dataset Features
 
-1. Clone the repository:
+| Feature      | Description                                    |
+| ------------ | ---------------------------------------------- |
+| `MedInc`     | Median household income in the neighborhood    |
+| `HouseAge`   | Median age of houses                           |
+| `AveRooms`   | Average number of rooms per household          |
+| `AveBedrms`  | Average number of bedrooms per household       |
+| `Population` | Neighborhood population                        |
+| `AveOccup`   | Average number of occupants per household      |
+| `Latitude`   | Geographic latitude                            |
+| `Longitude`  | Geographic longitude                           |
+| **`Price`**  | **Target — median house price (in $100,000s)** |
 
-   ```
-   git clone https://github.com/yourusername/House-Price-Predictor.git
-   cd House-Price-Predictor
-   ```
+---
 
-2. Install dependencies:
-   ```
-   pip install numpy pandas matplotlib scikit-learn
-   ```
+## 🔍 Exploratory Data Analysis
 
-## Usage
+### Feature Correlation Heatmap
 
-Run the script to load and explore the data:
+The heatmap below shows how strongly each feature correlates with house price and with each other. Values close to **1.0** indicate a strong positive relationship; values close to **-1.0** indicate a strong negative relationship.
+
+![Feature Correlation Heatmap](heatmap.png)
+
+**Key insight:** `MedInc` (median income) has the highest positive correlation with price — wealthier neighborhoods command significantly higher house prices.
+
+---
+
+## ⚙️ Model Pipeline
 
 ```
-python house_prices.py
+Raw Data → Train/Test Split (80/20) → StandardScaler → Linear Regression → Predictions
 ```
 
-This will display the first few rows, summary statistics, and the dataset shape.
+1. **Train/Test Split** — 80% of data used for training, 20% held out for evaluation
+2. **StandardScaler** — normalizes all features to mean=0, std=1 so no feature dominates
+3. **Linear Regression** — learns a weight for each feature that minimizes prediction error
 
-## Future Enhancements
+---
 
-- Implement machine learning models (e.g., Linear Regression, Random Forest)
-- Add data visualization
-- Include model evaluation metrics
-- Create a web interface for predictions
+## 📈 Results
 
-## License
+### Actual vs Predicted Prices
 
-[Add your license here, e.g., MIT]
+The scatter plot below compares the model's predictions against real house prices on the test set. The red dashed line represents perfect predictions — the closer the dots are to it, the better.
+
+![Actual vs Predicted House Prices](scatter.png)
+
+### Performance Metrics
+
+| Metric       | Value  | Meaning                                |
+| ------------ | ------ | -------------------------------------- |
+| **MSE**      | 0.5559 | Mean Squared Error                     |
+| **RMSE**     | 0.7456 | Off by ~$74,560 on average             |
+| **R² Score** | 0.5758 | Model explains ~58% of price variation |
+
+**Interpretation:** The model performs reasonably well for a baseline linear model. The scatter plot shows predictions are generally in the right range but struggle with very high-priced homes — a known limitation of linear regression on non-linear data.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Python 3.12**
+- **pandas** — data loading and manipulation
+- **scikit-learn** — model training and evaluation
+- **matplotlib / seaborn** — data visualization
+
+---
+
+## 🚀 How to Run
+
+```bash
+# Install dependencies
+pip install numpy pandas scikit-learn matplotlib seaborn
+
+# Run the model
+python3 house_prices.py
+```
+
+---
+
+## 🧠 Concepts Covered
+
+- Exploratory Data Analysis (EDA)
+- Feature correlation analysis
+- Train/test splitting
+- Feature standardization
+- Linear Regression
+- Model evaluation with RMSE and R²
+
+---
+
+## 🔮 Next Steps
+
+Linear Regression has a ceiling — it can only model straight-line relationships. Potential improvements:
+
+- **Random Forest Regressor** — handles non-linear relationships, typically boosts R² to ~0.80+
+- **Feature engineering** — create new features like income-to-room ratio
+- **Hyperparameter tuning** — use GridSearchCV to optimize model parameters
