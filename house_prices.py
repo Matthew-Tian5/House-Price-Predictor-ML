@@ -71,3 +71,8 @@ model.fit(X_train_scaled, Y_train) #Where the model learns
 print("model trained")
 print(f"Intercept: {model.intercept_:.4f}")
 print(f"Coefficients: {model.coef_}")
+
+
+Y_pred = model.predict(X_test_scaled)
+
+comparison = pd.DataFrame({'Actual': Y_test.values[:10], 'Predicted': Y_pred[:10]})
