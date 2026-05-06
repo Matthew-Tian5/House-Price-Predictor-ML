@@ -76,3 +76,17 @@ print(f"Coefficients: {model.coef_}")
 Y_pred = model.predict(X_test_scaled)
 
 comparison = pd.DataFrame({'Actual': Y_test.values[:10], 'Predicted': Y_pred[:10]})
+
+
+
+from sklearn.metrics import mean_squared_error, r2_score
+
+mse = mean_squared_error(Y_test, Y_pred)
+rmse = np.sqrt(mse) # the avg distance between predictions and the real values
+
+
+print(f"MSE: {mse:.4f}")
+print(f"RMSE: {rmse:.4f}")
+
+r2 = r2_score(Y_test, Y_pred) # tells me the variation in prices
+print(f"R² Score: {r2:.4f}")
