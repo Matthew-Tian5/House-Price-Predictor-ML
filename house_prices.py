@@ -61,3 +61,13 @@ scaler = StandardScaler()
 
 X_train_scaled = scaler.fit_transform(X_train) # learn scale from training data
 X_test_scaled = scaler.transform(X_test) # apply same scale to test data
+
+
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+model.fit(X_train_scaled, Y_train) #Where the model learns
+
+print("model trained")
+print(f"Intercept: {model.intercept_:.4f}")
+print(f"Coefficients: {model.coef_}")
